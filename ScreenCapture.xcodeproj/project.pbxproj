@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041C2CA01C1AEF47007346C6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 041C2C9F1C1AEF47007346C6 /* README.md */; };
+		041C2CA21C1AF2FD007346C6 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C2CA11C1AF2FD007346C6 /* ScreenRecorder.swift */; };
 		047C40AF1C1A294700D6B267 /* ScreenCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 047C40AE1C1A294700D6B267 /* ScreenCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		047C40C61C1A2A2D00D6B267 /* ScreenCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C40C51C1A2A2D00D6B267 /* ScreenCapture.swift */; };
 		047C40CE1C1A2AFA00D6B267 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C40CD1C1A2AFA00D6B267 /* AppDelegate.swift */; };
@@ -41,6 +43,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		041C2C9F1C1AEF47007346C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		041C2CA11C1AF2FD007346C6 /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		047C40AB1C1A294700D6B267 /* ScreenCapture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ScreenCapture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		047C40AE1C1A294700D6B267 /* ScreenCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenCapture.h; sourceTree = "<group>"; };
 		047C40B01C1A294700D6B267 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 		047C40A11C1A294700D6B267 = {
 			isa = PBXGroup;
 			children = (
+				041C2C9F1C1AEF47007346C6 /* README.md */,
 				047C40AD1C1A294700D6B267 /* ScreenCapture */,
 				047C40CC1C1A2AFA00D6B267 /* Example */,
 				047C40AC1C1A294700D6B267 /* Products */,
@@ -94,6 +99,7 @@
 			children = (
 				047C40AE1C1A294700D6B267 /* ScreenCapture.h */,
 				047C40C51C1A2A2D00D6B267 /* ScreenCapture.swift */,
+				041C2CA11C1AF2FD007346C6 /* ScreenRecorder.swift */,
 				047C40B01C1A294700D6B267 /* Info.plist */,
 			);
 			path = ScreenCapture;
@@ -222,7 +228,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041C2CA01C1AEF47007346C6 /* README.md in Sources */,
 				047C40C61C1A2A2D00D6B267 /* ScreenCapture.swift in Sources */,
+				041C2CA21C1AF2FD007346C6 /* ScreenRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
