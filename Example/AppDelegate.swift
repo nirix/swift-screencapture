@@ -49,15 +49,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func startRecording(sender: NSButton) {
-        let tmpDir: String = NSTemporaryDirectory()
-        
         do {
-            try NSFileManager.defaultManager().removeItemAtPath("\(tmpDir)test.mp4")
+            if (NSFileManager.defaultManager().fileExistsAtPath("\(self.tmpDir)screenRecording.mp4")) {
+                try NSFileManager.defaultManager().removeItemAtPath("\(self.tmpDir)screenRecording.mp4")
+            }
         } catch {}
         
         startRecordingBtn.enabled = false
         stopRecordingBtn.enabled = true
-        screenRecorder = ScreenCapture.recordScreen("\(tmpDir)test.mp4")
+        screenRecorder = ScreenCapture.recordScreen("\(self.tmpDir)screenRecording.mp4")
         screenRecorder!.start()
     }
     
@@ -67,8 +67,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         startRecordingBtn.enabled = true
         stopRecordingBtn.enabled = false
         
-        debugPrint(screenRecorder!.destinationUrl)
-        self.player = AVPlayer(URL: screenRecorder!.destinationUrl)
+        debugPrint(screenRecorder!.destination)
+        self.player = AVPlayer(URL: screenRecorder!.destination)
         self.playerView.player = self.player
         self.playerView.player?.play()
     }

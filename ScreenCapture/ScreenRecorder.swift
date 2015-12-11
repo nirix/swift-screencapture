@@ -10,20 +10,18 @@ import Foundation
 import AVFoundation
 
 public class ScreenRecorder: NSObject, AVCaptureFileOutputRecordingDelegate {
-    var destination: String
+    var destinationUrl: NSURL
     var session: AVCaptureSession?
     var movieFileOutput: AVCaptureMovieFileOutput?
     
-    public var destinationUrl: NSURL {
+    public var destination: NSURL {
         get {
-            return NSURL(fileURLWithPath: self.destination)
+            return self.destinationUrl
         }
     }
-    
-    public init(destination: String) {
-//        debugPrint("initialised ScreenRecorder with destination: \(destination)")
-        
-        self.destination = destination
+
+    public init(destination: NSURL) {
+        self.destinationUrl = destination
         
         self.session = AVCaptureSession()
         self.session?.sessionPreset = AVCaptureSessionPresetHigh
@@ -47,30 +45,14 @@ public class ScreenRecorder: NSObject, AVCaptureFileOutputRecordingDelegate {
         if ((self.session?.canAddOutput(self.movieFileOutput)) != nil) {
             self.session?.addOutput(self.movieFileOutput)
         }
-        
-//        if ((self.movieFileOutput?.connections.first) != nil) {
-//            let conn: AVCaptureConnection = self.movieFileOutput?.connections.first as! AVCaptureConnection
-//            if (conn.supportsVideoMinFrameDuration) {
-//                debugPrint("Setting min frame duration")
-//                conn.videoMinFrameDuration = CMTime(value: 1, timescale: 60)
-//            }
-//            
-//            if (conn.supportsVideoMaxFrameDuration) {
-//                debugPrint("Setting max frame duration")
-//                conn.videoMaxFrameDuration = kCMTimeZero
-//                conn.videoMaxFrameDuration = CMTime(value: 1, timescale: 60)
-//            }
-//        }
     }
  
     public func start() {
-//        debugPrint("Started recording to file: \(self.destination)")
         self.session?.startRunning()
         self.movieFileOutput?.startRecordingToOutputFileURL(self.destinationUrl, recordingDelegate: self)
     }
     
     public func stop() {
-//        debugPrint("Stopping recording to file: \(self.destination)")
         self.movieFileOutput?.stopRecording()
     }
     

@@ -8,6 +8,25 @@
 
 import Foundation
 
+// -------------------------------------------------------------------
+// Allow passing of strings, just convert them to an NSURL.
+
+public func captureRegion(destination: String) -> NSURL {
+    return captureRegion(NSURL(fileURLWithPath: destination))
+}
+
+public func captureScreen(destination: String) -> NSURL {
+    return captureScreen(NSURL(fileURLWithPath: destination))
+}
+
+public func recordScreen(destination: String) -> ScreenRecorder {
+    return recordScreen(NSURL(fileURLWithPath: destination))
+}
+
+// -------------------------------------------------------------------
+
+public func captureRegion(destination: NSURL) -> NSURL {
+    let destinationPath = destination.path! as String
     
     let task = NSTask()
     task.launchPath = "/usr/sbin/screencapture"
@@ -27,20 +46,6 @@ public func captureScreen(destination: NSURL) -> NSURL {
     return destination
 }
 
-public func recordScreen(destination: String) -> ScreenRecorder {
+public func recordScreen(destination: NSURL) -> ScreenRecorder {
     return ScreenRecorder(destination: destination)
-}
-
-func imageName() -> String {
-    // Just going to use this for now
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.timeStyle = .MediumStyle
-    dateFormatter.dateStyle = .ShortStyle
-    
-    let date = dateFormatter.stringFromDate(NSDate())
-        .stringByReplacingOccurrencesOfString("/", withString: "-")
-        .stringByReplacingOccurrencesOfString(":", withString: ".")
-        .stringByReplacingOccurrencesOfString(",", withString: "")
-    
-    return "Screen Shot \(date)"
 }
