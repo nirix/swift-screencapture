@@ -38,6 +38,10 @@ public func captureScreen() -> NSURL {
     return url
 }
 
+public func recordScreen(destination: String) -> ScreenRecorder {
+    return ScreenRecorder(destination: destination)
+}
+
 func imageName() -> String {
     // Just going to use this for now
     let dateFormatter = NSDateFormatter()
@@ -49,5 +53,5 @@ func imageName() -> String {
         .stringByReplacingOccurrencesOfString(":", withString: ".")
         .stringByReplacingOccurrencesOfString(",", withString: "")
     
-    return "Screen Shot \(date).png"
+    return "Screen Shot \(date)"
 }
