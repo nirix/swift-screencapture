@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var startRecordingBtn: NSButton!
     @IBOutlet weak var stopRecordingBtn: NSButton!
     
+    let tmpDir: String = NSTemporaryDirectory()
     var player: AVPlayer?
     
     var screenRecorder: ScreenCapture.ScreenRecorder?
@@ -33,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func captureRegion(sender: NSButton) {
-        let imgPath: String = ScreenCapture.captureRegion().path!
+        let imgPath: String = ScreenCapture.captureRegion("\(self.tmpDir)captureRegion.png").path!
         
         if (NSFileManager.defaultManager().fileExistsAtPath(imgPath)) {
             let img: NSImage = NSImage(contentsOfFile: imgPath)!
@@ -42,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func captureScreen(sender: NSButton) {
-        let imgPath: String = ScreenCapture.captureScreen().path!
+        let imgPath: String = ScreenCapture.captureScreen("\(self.tmpDir)captureScreen.png").path!
         let img: NSImage = NSImage(contentsOfFile: imgPath)!
         imgView.image = img
     }

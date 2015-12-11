@@ -8,34 +8,23 @@
 
 import Foundation
 
-public func captureRegion() -> NSURL {
-    let tmpDir: String = NSTemporaryDirectory()
     
     let task = NSTask()
     task.launchPath = "/usr/sbin/screencapture"
-
-    let name = imageName()
-    let imgPath = "\(tmpDir)/\(name).png";
-    
-    task.arguments = ["-i", "-r", imgPath]
+    task.arguments = ["-i", "-r", destinationPath]
     task.launch()
     task.waitUntilExit()
     
-    return NSURL(fileURLWithPath: imgPath)
+    return destination
 }
 
-public func captureScreen() -> NSURL {
-    let tmpDir: String = NSTemporaryDirectory()
-    let name = imageName()
-    let imgPath = "\(tmpDir)/\(name).png"
-    
+public func captureScreen(destination: NSURL) -> NSURL {
     let img = CGDisplayCreateImage(CGMainDisplayID())
-    let url = NSURL(fileURLWithPath: imgPath)
-    let dest = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, nil)
+    let dest = CGImageDestinationCreateWithURL(destination, kUTTypePNG, 1, nil)
     CGImageDestinationAddImage(dest!, img!, nil)
     CGImageDestinationFinalize(dest!)
     
-    return url
+    return destination
 }
 
 public func recordScreen(destination: String) -> ScreenRecorder {
