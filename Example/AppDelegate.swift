@@ -30,7 +30,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+        do {
+            if (NSFileManager.defaultManager().fileExistsAtPath("\(self.tmpDir)captureRegion.png")) {
+                try NSFileManager.defaultManager().removeItemAtPath("\(self.tmpDir)captureRegion.png")
+            }
+            
+            if (NSFileManager.defaultManager().fileExistsAtPath("\(self.tmpDir)captureScreen.png")) {
+                try NSFileManager.defaultManager().removeItemAtPath("\(self.tmpDir)captureScreen.png")
+            }
+            
+            if (NSFileManager.defaultManager().fileExistsAtPath("\(self.tmpDir)screenRecording.mp4")) {
+                try NSFileManager.defaultManager().removeItemAtPath("\(self.tmpDir)screenRecording.mp4")
+            }
+        } catch {}
     }
     
     @IBAction func captureRegion(sender: NSButton) {
