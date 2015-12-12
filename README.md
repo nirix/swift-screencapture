@@ -1,4 +1,4 @@
-# ScreenCapture
+# ScreenCapture [![GitHub license](https://img.shields.io/github/license/nirix/swift-screencapture.svg)]() [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![CocoaPods](https://img.shields.io/cocoapods/v/ScreenCapture.svg)](https://cocoapods.org/pods/ScreenCapture)
 
 This framework makes capturing screenshots within OS X easy.
 
