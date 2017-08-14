@@ -11,24 +11,24 @@ import Foundation
 // -------------------------------------------------------------------
 // Allow passing of strings, just convert them to an NSURL.
 
-public func captureRegion(destination: String) -> NSURL {
-    return captureRegion(NSURL(fileURLWithPath: destination))
+public func captureRegion(_ destination: String) -> URL {
+    return captureRegion(URL(fileURLWithPath: destination))
 }
 
-public func captureScreen(destination: String) -> NSURL {
-    return captureScreen(NSURL(fileURLWithPath: destination))
+public func captureScreen(_ destination: String) -> URL {
+    return captureScreen(URL(fileURLWithPath: destination))
 }
 
-public func recordScreen(destination: String) -> ScreenRecorder {
-    return recordScreen(NSURL(fileURLWithPath: destination))
+public func recordScreen(_ destination: String) -> ScreenRecorder {
+    return recordScreen(URL(fileURLWithPath: destination))
 }
 
 // -------------------------------------------------------------------
 
-public func captureRegion(destination: NSURL) -> NSURL {
-    let destinationPath = destination.path! as String
+public func captureRegion(_ destination: URL) -> URL {
+    let destinationPath = destination.path as String
     
-    let task = NSTask()
+    let task = Process()
     task.launchPath = "/usr/sbin/screencapture"
     task.arguments = ["-i", "-r", destinationPath]
     task.launch()
@@ -37,15 +37,15 @@ public func captureRegion(destination: NSURL) -> NSURL {
     return destination
 }
 
-public func captureScreen(destination: NSURL) -> NSURL {
+public func captureScreen(_ destination: URL) -> URL {
     let img = CGDisplayCreateImage(CGMainDisplayID())
-    let dest = CGImageDestinationCreateWithURL(destination, kUTTypePNG, 1, nil)
+    let dest = CGImageDestinationCreateWithURL(destination as CFURL, kUTTypePNG, 1, nil)
     CGImageDestinationAddImage(dest!, img!, nil)
     CGImageDestinationFinalize(dest!)
     
     return destination
 }
 
-public func recordScreen(destination: NSURL) -> ScreenRecorder {
+public func recordScreen(_ destination: URL) -> ScreenRecorder {
     return ScreenRecorder(destination: destination)
 }

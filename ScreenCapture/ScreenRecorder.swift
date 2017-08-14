@@ -9,60 +9,56 @@
 import Foundation
 import AVFoundation
 
-public class ScreenRecorder: NSObject, AVCaptureFileOutputRecordingDelegate {
-    var destinationUrl: NSURL
-    var session: AVCaptureSession?
-    var movieFileOutput: AVCaptureMovieFileOutput?
+open class ScreenRecorder: NSObject, AVCaptureFileOutputRecordingDelegate {
+    let destinationUrl: URL
+    let session: AVCaptureSession
+    let movieFileOutput: AVCaptureMovieFileOutput
     
-    public var destination: NSURL {
+    open var destination: URL {
         get {
             return self.destinationUrl
         }
     }
 
-    public init(destination: NSURL) {
-        self.destinationUrl = destination
+    public init(destination: URL) {
+        destinationUrl = destination
         
-        self.session = AVCaptureSession()
-        self.session?.sessionPreset = AVCaptureSessionPresetHigh
+        session = AVCaptureSession()
+        session.sessionPreset = AVCaptureSessionPresetHigh
         
         let displayId: CGDirectDisplayID = CGDirectDisplayID(CGMainDisplayID())
 
         let input: AVCaptureScreenInput = AVCaptureScreenInput(displayID: displayId)
-        
-        if (input == false) {
-            self.session = nil
-            return
-        }
-        
-        if ((self.session?.canAddInput(input)) != nil) {
-            self.session?.addInput(input)
-        }
-        
-        self.movieFileOutput = AVCaptureMovieFileOutput()
 
         
-        if ((self.session?.canAddOutput(self.movieFileOutput)) != nil) {
-            self.session?.addOutput(self.movieFileOutput)
+        if session.canAddInput(input) {
+            session.addInput(input)
         }
+        
+        movieFileOutput = AVCaptureMovieFileOutput()
+
+        if session.canAddOutput(movieFileOutput) {
+            session.addOutput(movieFileOutput)
+        }
+        
     }
  
-    public func start() {
-        self.session?.startRunning()
-        self.movieFileOutput?.startRecordingToOutputFileURL(self.destinationUrl, recordingDelegate: self)
+    open func start() {
+        session.startRunning()
+        movieFileOutput.startRecording(toOutputFileURL: self.destinationUrl, recordingDelegate: self)
     }
     
-    public func stop() {
-        self.movieFileOutput?.stopRecording()
+    open func stop() {
+        movieFileOutput.stopRecording()
     }
     
-    public func captureOutput(
-        captureOutput: AVCaptureFileOutput!,
-        didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!,
-        fromConnections connections: [AnyObject]!,
-        error: NSError!
+    open func capture(
+        _ captureOutput: AVCaptureFileOutput!,
+        didFinishRecordingToOutputFileAt outputFileURL: URL!,
+        fromConnections connections: [Any]!,
+        error: Error!
     ) {
-        self.session?.stopRunning()
-        self.session = nil
+        //
+        session.stopRunning()
     }
 }
