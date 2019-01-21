@@ -55,6 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func captureScreen(sender: NSButton) {
+        window.performMiniaturize(sender)
         let imgPath: String = ScreenCapture.captureScreen("\(self.tmpDir)captureScreen.png").path
         let img: NSImage = NSImage(contentsOfFile: imgPath)!
         imgView.image = img
